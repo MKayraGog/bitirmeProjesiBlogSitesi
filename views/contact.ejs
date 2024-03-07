@@ -1,0 +1,49 @@
+<%- include("partials/_header") %>
+   <main>
+       <div class="container my-4">
+           <h2 class="my-3">Contact-Us</h2>
+           <div class="row g-2">
+               <div class="col-md-6">
+                   <iframe id="map" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12047.316769457497!2d29.0526574!3d40.9852209!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cac78dac1ac9a3%3A0xbd47329deac1fedf!2sMarmara%20%C3%9Cniversitesi%20G%C3%B6ztepe%20Yerle%C5%9Fkesi!5e0!3m2!1str!2str!4v1708772936172!5m2!1str!2str" width="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+               </div>
+               <div class="col-md-6">
+                   <div class="card bg-dark">
+                       <div class="card-body">
+                           <div class="alert alert-warning">
+                               Lütfen formu doldurun.
+                           </div>
+                           <form class="row g-3 text-dark">
+                               <div class="col-md-6">
+                                   <label for="email" class="form-label">E-mail</label>
+                                   <input type="email" name="email" id="email" class="form-control">
+                               </div>
+                               <div class="col-md-6">
+                                   <label for="name" class="form-label">Name</label>
+                                   <input type="text" name="Name" id="Name" class="form-control">
+                               </div>
+                               <div class="col-md-12">
+                                   <label for="name" class="form-label">Phone</label>
+                                   <input type="text" name="phone" id="phone" class="form-control">
+                               </div>
+                               <div class="col-md-12">
+                                   <label for="subject" class="form-label">Subject</label>
+                                   <input type="text" name="subject" id="subject" class="form-control">
+                               </div>
+                               <div class="col-md-12">
+                                   <label for="message" class="form-label">Message</label>
+                                   <textarea name="message" id="message"  class="form-control"></textarea>
+                               </div>
+                               <div class="col-12">
+                                   <button class="btn btn-outline-dark" style="width:100%">Send Message</button>
+                               </div>
+
+                           </form>
+                       </div>
+                   </div>
+           </div>
+
+       </div>
+   </main>
+<%- include("partials/footer") %>
+</body>
+</html>

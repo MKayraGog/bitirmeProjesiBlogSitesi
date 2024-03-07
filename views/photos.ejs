@@ -1,0 +1,56 @@
+<%- include("partials/_header") %>
+    <main>
+        <div class="container my-4">
+            <div class="row">
+                <div class="col-md-3 d-none d-md-block">
+                    <div class="list-group">
+                        <a href="#" class="list-group-item list-group-item action">Category 1</a>
+                        <a href="#" class="list-group-item list-group-item action">Category 1</a>
+                        <a href="#" class="list-group-item list-group-item action">Category 1</a>
+                        <a href="#" class="list-group-item list-group-item action">Category 1</a>
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <nav>
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="#">Library</a></li>
+                            <li class="breadcrumb-item active">Data</li>
+                        </ol>
+                    </nav>
+                    <div class="card mb-2 shadow">
+                        <div class="row">
+
+                            <% for (photo of photos) { %>
+                            <div class="col-4">
+                                <img src="images\1.jpeg" alt="" class="img-fluid rounded-start">
+                            </div>
+                            <div class="col-8">
+                                <div class="card-body">
+                                    <h5 class="card-title">Card Title</h5>
+                                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio
+                                        cumque sapiente recusandae ratione beatae deleniti mollitia molestias suscipit
+                                        eligendi quaerat?</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <% } %>
+
+                </div>
+                <nav>
+                    <ul class="pagination justify-content-center">
+                        <li class="page-item disabled"><a href="#" class="page-link">Previous</a></li>
+                        <li class="page-item"><a href="#" class="page-link">1</a></li>
+                        <li class="page-item"><a href="#" class="page-link">2</a></li>
+                        <li class="page-item"><a href="#" class="page-link">3</a></li>
+                        <li class="page-item"><a href="#" class="page-link">Next</a></li>
+
+                    </ul>
+                </nav>
+
+            </div>
+        </div>
+    </main>
+<%- include("partials/footer") %>

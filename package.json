@@ -1,0 +1,21 @@
+{
+  "name": "blogsitesi",
+  "version": "1.0.0",
+  "description": "Marmara Üniversitesi MYO Bilgisayar Programciliği Bölümü Blog Sitesi Konulu Bitirme Projesi",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "author": "Mehmet Kayra Gög, Deniz Baran Boz",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "mongoose": "^8.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
