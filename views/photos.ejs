@@ -22,15 +22,13 @@
                         <div class="row">
 
                             <% for (photo of photos) { %>
-                            <div class="col-4">
-                                <img src="images\1.jpeg" alt="" class="img-fluid rounded-start">
+                            <div class="col-4" >
+                                <img src="images\1.jpeg" href="/photos/<%= photo._id %>" alt="" class="img-fluid rounded-start">
                             </div>
                             <div class="col-8">
                                 <div class="card-body">
-                                    <h5 class="card-title">Card Title</h5>
-                                    <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio
-                                        cumque sapiente recusandae ratione beatae deleniti mollitia molestias suscipit
-                                        eligendi quaerat?</p>
+                                    <h3 class="card-title"><%= photo.name %></h3>
+                                    <p class="card-text"><%= photo.description.substring(0, 80)+ "..." %></p>
                                 </div>
                             </div>
                         </div>

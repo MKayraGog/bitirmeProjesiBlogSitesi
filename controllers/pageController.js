@@ -14,4 +14,16 @@ const getContactPage = (req, res) => {
     });
 };
 
-export {getHomePage, getBlogsPage, getContactPage};
+const getRegisterPage = (req, res) => {
+    res.render('register', {
+        link:'register',
+    });
+};
+
+const getLoginPage = (req, res) => {
+    res.render('login', {
+        link:'login',
+    });
+};
+
+export {getHomePage, getBlogsPage, getContactPage, getRegisterPage, getLoginPage};

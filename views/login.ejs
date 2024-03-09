@@ -1,0 +1,38 @@
+<%- include("partials/_header") %>
+<main>
+    <div class="container my-4">
+        <h2 class="my-3">Login</h2>
+        <div class="row g-2">
+            <div class="col-md-6">
+            </div>
+            <div class="col-md-6">
+                <div class="card bg-dark">
+                    <div class="card-body">
+                        <div class="alert alert-warning">
+                            Lütfen formu doldurun.
+                        </div>
+                        <form class="row g-3 text-dark" action="/users/login" method="POST">
+                            <div class="col-md-6">
+                                <label for="email" class="form-label">E-mail</label>
+                                <input type="email" name="email" id="email" class="form-control">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="name" class="form-label">Name</label>
+                                <input type="text" name="name" id="name" class="form-control">
+                            </div>
+                            <div class="col-md-12">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" name="password" id="password" class="form-control">
+                            </div>
+
+                            <div class="col-12">
+                                <button type="submit" class="btn btn-outline-dark" style="width:100%">Giriş Yap</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<%- include("partials/footer") %>
