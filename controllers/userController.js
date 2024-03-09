@@ -1,16 +1,16 @@
 import User from '../models/userModel.js';
 import bcrypt from 'bcrypt';
-
+import jwt from 'jsonwebtoken';
 const createUser = async (req, res) => {
     try {
         const user = await User.create(req.body);
         res.status(201).json({
-            succeded: true,
+            succeeded: true,
             user,
         });
     } catch (error) {
         res.status(500).json({
-            succeded: false,
+            succeeded: false,
             error,
         });
     }
@@ -28,26 +28,42 @@ const loginUser = async (req, res) => {
             same = await bcrypt.compare(password, user.password);
         }else {
             return res.status(401).json({
-                succeded: false,
+                succeeded: false,
                 error: 'Böyle bir kullanıcı yok',
             });
         }
 
         if (same){
-            res.status(200).send('Başarıyla giriş yaptınız.');
+
+            const token = createToken(user._id)
+            res.cookie("jwt", token, {
+                httpOnly:true,
+                maxAge:1000 * 60 * 60 * 24,
+            });
+            res.redirect('/users/dashboard');
         } else {
             res.status(401).json({
-                succeded: false,
+                succeeded: false,
                 error: 'Şifre eşleşmiyor',
             });
         }
 
     } catch (error) {
         res.status(500).json({
-            succeded: false,
+            succeeded: false,
             error,
         });
     }
 };
+const createToken = (userId) => {
+    return jwt.sign({userId},process.env.JWT_SECRET, {
+       expiresIn: '1d',
+    });
+};
+const getDashboardPage = (req, res) => {
+    res.render('dashboard', {
+        link:'dashboard',
+    });
+};
 
-export { createUser, loginUser };
+export { createUser, loginUser, getDashboardPage };

@@ -1,4 +1,6 @@
 const getHomePage = (req, res) => {
+    console.log("REQUEST USER:::", req.user);
+
     res.render('home', {
         link: 'home',
     });
