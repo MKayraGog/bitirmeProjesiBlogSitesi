@@ -25,15 +25,25 @@
                <li class="nav-item" class="<%= link === 'photos' && 'nav-link active' %>">
                    <a href="/photos" class="nav-link">Blogs</a>
                </li>
+               <li class="nav-item" class="<%= link === 'dashboard' && 'nav-link active' %>">
+                   <a href="/users/dashboard" class="nav-link">Dashboard</a>
+               </li>
                <li class="nav-item" class="<%= link === 'contact' && 'nav-link active' %>">
                    <a href="/contact" class="nav-link">Contact</a>
                </li>
+
+               <% if (user) { %>
+                   <a href="/logout" class="nav-link">Çıkış Yap</a>
+               <% } else { %>
+
+               <% } %>
+
                <li class="nav-item" class="<%= link === 'login' && 'nav-link active' %>">
                 <a href="/login" class="nav-link">Giriş Yap</a>
                 </li>
                <li class="nav-item" class="<%= link === 'register' && 'nav-link active' %>">
                     <a href="/register" class="nav-link">Kayıt Ol</a>
-                </li>                
+                </li>
            </ul>
           <div class="row g-1">
               <div class="col-8">
