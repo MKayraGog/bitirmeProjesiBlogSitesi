@@ -2,13 +2,13 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 import validator from "validator";
 
-const { Schema} = mongoose;
+const { Schema } = mongoose;
 
 const userSchema = new Schema({
     name: {
         type: String,
         required: [true, "Username alanı zorunlu"],
-       lowercase: true,
+        lowercase: true,
         validate: [validator.isAlphanumeric, "only alphanumeric"],
     },
     email: {
@@ -22,19 +22,31 @@ const userSchema = new Schema({
         required: [true, "Şifre alanı zorunlu"],
         minLength: [9, "En az 9 karakter"],
     },
+    followers: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'User',
+        },
+    ],
+    followings: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'User',
+        },
+    ],
 },
-{
-    timestamps: true,
-}
+    {
+        timestamps: true,
+    }
 );
 
 userSchema.pre('save', function (next) {
     const user = this;
     bcrypt.hash(user.password, 10, (err, hash) => {
-        user.password = hash;
-        next();
+      user.password = hash;
+      next();
     });
-});
+  });
 
 const User = mongoose.model('User', userSchema);
 

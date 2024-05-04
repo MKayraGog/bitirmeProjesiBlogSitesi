@@ -1,13 +1,13 @@
 import express from 'express';
-import * as PageController from '../controllers/pageController.js';
-
+import * as pageController from '../controllers/pageController.js';
 
 const router = express.Router();
 
-router.route('/').get(PageController.getHomePage);
-router.route('/blogs').get(PageController.getBlogsPage);
-router.route('/contact').get(PageController.getContactPage);
-router.route('/register').get(PageController.getRegisterPage);
-router.route('/login').get(PageController.getLoginPage);
-
+router.route('/').get(pageController.getHomePage);
+router.route('/blogs').get(pageController.getBlogsPage);
+router.route('/register').get(pageController.getRegisterPage);
+router.route('/login').get(pageController.getLoginPage);
+router.route('/logout').get(pageController.getLogout);
+router.route('/contact').get(pageController.getContactPage);
+router.route('/contact').post(pageController.sendMail);
 export default router;
