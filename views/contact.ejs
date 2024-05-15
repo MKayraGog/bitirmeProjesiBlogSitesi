@@ -1,4 +1,5 @@
 <%- include("partials/_header") %>
+
    <main>
        <div class="container my-4">
            <h2 class="my-3">Contact-Us</h2>
@@ -44,6 +45,51 @@
 
        </div>
    </main>
-<%- include("partials/footer") %>
-</body>
-</html>
+
+   <script>
+    const form = document.querySelector('form')
+    const sendMessage = document.querySelector('#sendMessage')
+
+    form.addEventListener("submit", async (e) => {
+       e.preventDefault();
+
+       const name = form.name.value
+       const email = form.email.value
+       const message = form.message.value
+
+       try {
+          const res = await fetch('/contact', {
+             method: "POST",
+             body: JSON.stringify({ name, email, message }),
+             headers: { "Content-Type": "application/json" }
+          })
+
+          const data = await res.json();
+
+          console.log("DATA", data)
+
+          if (data.succeeded) {
+
+             sendMessage.textContent = "Your Message Received Succsfully"
+             sendMessage.style.display = "block"
+
+             setTimeout(() => {
+                sendMessage.style.display = "none"
+                form.name.value = ""
+                form.email.value = ""
+                form.message.value = ""
+
+             }, 5000)
+
+
+
+          }
+
+
+       } catch (err) {
+          console.log("ERR::", err)
+       }
+    })
+ </script>
+
+ <%- include("partials/_footer") %>

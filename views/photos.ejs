@@ -1,55 +1,45 @@
 <%- include("partials/_header") %>
-    <main>
-        <div class="container my-4">
-            <div class="row">
-                <div class="col-md-3 d-none d-md-block">
-                    <div class="list-group">
-                        <a href="#" class="list-group-item list-group-item action">Category 1</a>
-                        <a href="#" class="list-group-item list-group-item action">Category 1</a>
-                        <a href="#" class="list-group-item list-group-item action">Category 1</a>
-                        <a href="#" class="list-group-item list-group-item action">Category 1</a>
-                    </div>
-                </div>
-                <div class="col-md-9">
-                    <nav>
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item"><a href="#">Library</a></li>
-                            <li class="breadcrumb-item active">Data</li>
-                        </ol>
-                    </nav>
 
+         <div class="gallery">
+            <div class="container_with">
+               <div class="row">
+                  <div class="col-md-12">
+                     <div class="titlepage text_align_center">
+                        <span>03</span>
+                        <h2>Our gallery</h2>
+                     </div>
+                  </div>
+               </div>
+               <div class="tz-gallery">
+                  <div class="row">
 
-                            <% for (photo of photos) { %>
-                                <div class="card mb-2 shadow">
-                                    <div class="row">
-                            <div class="col-4" >
-                                <img src="images\1.jpeg" href="/photos/<%= photo._id %>" alt="" class="img-fluid rounded-start">
-                            </div>
-                            <div class="col-8">
-                                <div class="card-body">
-                                    <h3 class="card-title"><%= photo.name %></h3>
-                                    <p class="card-text"><%= photo.description.substring(0, 80)+ "..." %></p>
-                                </div>
-                            </div>
+                     <% for (photo of photos) { %>
+                        <div class="col-lg-4 col-md-6 ma_bottom30">
+                           <div class="lightbox">
+                              <img src="<%= photo.url %>" alt="<%= photo.name %>">
+                              <div class="view_main">
+                                 <div class="pose">
+                                    <a class="read_more" href="/photos/<%= photo._id %>"><img src="images/ga.png"
+                                          alt="#" /></a>
+                                    <h3 style="padding-top:10px; padding-bottom:10px">
+                                       <%= photo.name %>
+                                    </h3>
+                                    <p style="padding-top:10px;">
+                                       <%= photo.description.substring(0, 80)+ "..." %>
+                                    </p>
+                                 </div>
+                              </div>
+                           </div>
                         </div>
-                    </div>
 
-                    <% } %>
+                        <% } %>
 
-                </div>
-                <nav>
-                    <ul class="pagination justify-content-center">
-                        <li class="page-item disabled"><a href="#" class="page-link">Previous</a></li>
-                        <li class="page-item"><a href="#" class="page-link">1</a></li>
-                        <li class="page-item"><a href="#" class="page-link">2</a></li>
-                        <li class="page-item"><a href="#" class="page-link">3</a></li>
-                        <li class="page-item"><a href="#" class="page-link">Next</a></li>
-
-                    </ul>
-                </nav>
-
+                           <div class="col-md-12">
+                              <a class="plus_btn" href="gallery.html">+</a>
+                           </div>
+                  </div>
+               </div>
             </div>
-        </div>
-    </main>
-<%- include("partials/footer") %>
+         </div>
+
+<%- include("partials/_footer") %>
