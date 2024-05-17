@@ -1,25 +1,19 @@
 <%- include("partials/_header") %>
-  <!-- body -->
 
   <body class="main-layout inner_page">
-    <!-- loader  -->
+
     <div class="loader_bg">
       <div class="loader"><img src="/images/loading.gif" alt="#" /></div>
     </div>
-    <!-- end loader -->
 
-    <!-- header -->
     <%- include("partials/_menu") %>
-      <!-- end header inner -->
 
-
-      <!--  customers -->
       <div class="customers">
         <div class="container">
           <div class="row">
             <div class="col-md-12">
               <div class="titlepage text_align_center">
-                <h2>Welcome <%= user.name %>
+                <h2>Welcome <%= user.username %>
                 </h2>
               </div>
             </div>
@@ -41,7 +35,6 @@
             </div>
           </div>
 
-
           <div class="row">
             <div class="col-md-12 text_align_center">
               <button data-toggle="modal" data-target=".bd-example-modal-lg" type="button"
@@ -50,10 +43,9 @@
             </div>
           </div>
 
-
         </div>
       </div>
-      <!-- end customers  -->
+
       <% if (photos.length> 0 ) { %>
         <div class="gallery">
           <div class="container_with">
@@ -227,5 +219,4 @@
                     </div>
                   </div>
 
-                  <!-- end footer -->
                   <%- include("partials/_footer") %>

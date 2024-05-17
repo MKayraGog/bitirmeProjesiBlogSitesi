@@ -1,22 +1,22 @@
 import nodemailer from 'nodemailer';
-import Photo from '../models/photoModels.js';
+import Photo from '../models/photoModel.js';
 import User from '../models/userModel.js';
 
-const getHomePage = async (req, res) => {
+const getIndexPage = async (req, res) => {
   const photos = await Photo.find().sort({ uploadedAt: -1 }).limit(3);
 
   const numOfUser = await User.countDocuments({});
   const numOfPhotos = await Photo.countDocuments({});
 
-  res.render('home', {
-    link: 'home',
+  res.render('index', {
+    link: 'index',
     photos,
     numOfUser,
     numOfPhotos,
   });
 };
 
-const getBlogsPage = (req, res) => {
+const getAboutPage = (req, res) => {
   res.render('about', {
     link: 'about',
   });
@@ -183,9 +183,9 @@ const sendMail = async (req, res) => {
   try {
     // create reusable transporter object using the default SMTP transport
     let transporter = nodemailer.createTransport({
-      host: 'smtp.gmail.com',
-      port: 465,
-      secure: true, // true for 465, false for other ports
+      host: 'smtp-mail.outlook.com',
+      port: 587,
+      secure: false, // true for 465, false for other ports
       auth: {
         user: process.env.NODE_MAIL, // generated ethereal user
         pass: process.env.NODE_PASS, // generated ethereal password
@@ -194,7 +194,7 @@ const sendMail = async (req, res) => {
 
     // send mail with defined transport object
     await transporter.sendMail({
-      to: 'denizb.mkayra@gmail.com', // list of receivers
+      to: 'projemarmara@hotmail.com', // list of receivers
       subject: `MAIL FROM ${req.body.email}`, // Subject line
       html: htmlTemplate, // html body
     });
@@ -208,4 +208,12 @@ const sendMail = async (req, res) => {
   }
 };
 
-export { getHomePage, getBlogsPage, getRegisterPage, getLoginPage, getLogout, getContactPage, sendMail };
+export {
+  getIndexPage,
+  getAboutPage,
+  getRegisterPage,
+  getLoginPage,
+  getLogout,
+  getContactPage,
+  sendMail,
+};

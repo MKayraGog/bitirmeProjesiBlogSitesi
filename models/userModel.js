@@ -1,52 +1,53 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
-import validator from "validator";
+import validator from 'validator';
 
 const { Schema } = mongoose;
 
-const userSchema = new Schema({
-    name: {
-        type: String,
-        required: [true, "Username alanı zorunlu"],
-        lowercase: true,
-        validate: [validator.isAlphanumeric, "only alphanumeric"],
+const userSchema = new Schema(
+  {
+    username: {
+      type: String,
+      required: [true, 'Username area is required'],
+      lowercase: true,
+      validate: [validator.isAlphanumeric, 'Only Alphanumeric characters'],
     },
     email: {
-        type: String,
-        required: [true, "Email alanı zorunlu"],
-        unique: true,
-        validate: [validator.isEmail, "valid email is required"]
+      type: String,
+      required: [true, 'Email area is required'],
+      unique: true,
+      validate: [validator.isEmail, 'Valid email is required'],
     },
     password: {
-        type: String,
-        required: [true, "Şifre alanı zorunlu"],
-        minLength: [9, "En az 9 karakter"],
+      type: String,
+      required: [true, 'Password area is required'],
+      minLength: [4, 'At least 4 characters'],
     },
     followers: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'User',
-        },
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+      },
     ],
     followings: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'User',
-        },
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+      },
     ],
-},
-    {
-        timestamps: true,
-    }
+  },
+  {
+    timestamps: true,
+  }
 );
 
 userSchema.pre('save', function (next) {
-    const user = this;
-    bcrypt.hash(user.password, 10, (err, hash) => {
-      user.password = hash;
-      next();
-    });
+  const user = this;
+  bcrypt.hash(user.password, 10, (err, hash) => {
+    user.password = hash;
+    next();
   });
+});
 
 const User = mongoose.model('User', userSchema);
 

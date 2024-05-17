@@ -1,102 +1,111 @@
 <%- include("partials/_header") %>
-<main>
-    <div class="container my-4">
-        <h2 class="my-3">Register</h2>
-        <div class="row g-2">
-            <div class="col-md-6">
-            </div>
-            <div class="col-md-6">
-                <div class="card bg-dark">
-                    <div class="card-body">
-                        <div class="alert alert-warning">
-                            Lütfen formu doldurun.
+
+   <body class="main-layout inner_page">
+
+      <div class="loader_bg">
+         <div class="loader"><img src="images/loading.gif" alt="#" /></div>
+      </div>
+
+      <%- include("partials/_menu") %>
+
+         <div class="contact">
+            <div class="container">
+               <div class="row">
+                  <div class="col-md-12 ">
+                     <div class="titlepage text_align_center">
+                        <h2>Register</h2>
+                     </div>
+                  </div>
+                  <div class="col-md-8 offset-md-2">
+                     <form id="request" class="main_form" action="users/register" method="POST">
+                        <div class="row">
+                           <div class="col-md-12">
+                              <input class="form_control" placeholder="Username" type="text" name="username">
+                           </div>
+                           <div class="col-md-12">
+                              <div style="display: none;" class="alert alert-danger" id="username"></div>
+                           </div>
+                           <div class="col-md-12">
+                              <input class="form_control" placeholder="Email" type="text" name="email">
+                           </div>
+                           <div class="col-md-12">
+                              <div style="display: none;" class="alert alert-danger" id="email"></div>
+                           </div>
+                           <div class="col-md-12">
+                              <input class="form_control" placeholder="Password" type="password" name="password">
+                           </div>
+                           <div class="col-md-12">
+                              <div style="display: none;" class="alert alert-danger" id="password"></div>
+                           </div>
+                           <div class="col-md-12">
+                              <div class="group_form">
+                                 <button class="send_btn">Register</button>
+                              </div>
+                           </div>
                         </div>
-                        <form class="row g-3 text-dark" action="/users/register" method="POST">
-                            <div class="col-md-6">
-                                <label for="email" class="form-label">E-mail</label>
-                                <input type="email" name="email" id="email" class="form-control">
-                            </div>
-
-                            <div class="col-md-6">
-                                <label for="name" class="form-label">Name</label>
-                                <input type="text" name="name" id="name" class="form-control">
-                            </div>
-
-                            <div class="col-md-12">
-                                <label for="password" class="form-label">Password</label>
-                                <input type="password" name="password" id="password" class="form-control">
-                            </div>
-
-
-                            <div class="col-12">
-                                <button type="submit" class="btn btn-outline-dark" style="width:100%">Kayıt Ol!</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+                     </form>
+                  </div>
+               </div>
             </div>
-        </div>
-    </div>
-</main>
+         </div>
 
-<script>
-    const form = document.querySelector('form')
-    const emailError = document.querySelector('#email')
-    const passwordError = document.querySelector('#password')
-    const usernameError = document.querySelector('#username')
+         <script>
+            const form = document.querySelector('form')
+            const emailError = document.querySelector('#email')
+            const passwordError = document.querySelector('#password')
+            const usernameError = document.querySelector('#username')
 
-    form.addEventListener("submit", async (e) => {
-       e.preventDefault();
+            form.addEventListener("submit", async (e) => {
+               e.preventDefault();
 
-       emailError.textContent = "";
-       passwordError.textContent = "";
-       usernameError.textContent = "";
-       emailError.style.display = "none"
-       passwordError.style.display = "none"
-       usernameError.style.display = "none"
+               emailError.textContent = "";
+               passwordError.textContent = "";
+               usernameError.textContent = "";
+               emailError.style.display = "none"
+               passwordError.style.display = "none"
+               usernameError.style.display = "none"
 
-       const email = form.email.value
-       const password = form.password.value
-       const username = form.username.value
+               const email = form.email.value
+               const password = form.password.value
+               const username = form.username.value
 
-       try {
-          const res = await fetch('users/register', {
-             method: "POST",
-             body: JSON.stringify({ email, password, username }),
-             headers: { "Content-Type": "application/json" }
-          })
+               try {
+                  const res = await fetch('users/register', {
+                     method: "POST",
+                     body: JSON.stringify({ email, password, username }),
+                     headers: { "Content-Type": "application/json" }
+                  })
 
-          const data = await res.json();
+                  const data = await res.json();
 
-          if (data) {
+                  if (data) {
 
-             if (data.email) {
-                emailError.textContent = data.email
-                emailError.style.display = "block"
-             }
+                     if (data.email) {
+                        emailError.textContent = data.email
+                        emailError.style.display = "block"
+                     }
 
-             if (data.password) {
-                passwordError.textContent = data.password
-                passwordError.style.display = "block"
-             }
+                     if (data.password) {
+                        passwordError.textContent = data.password
+                        passwordError.style.display = "block"
+                     }
 
-             if (data.username) {
-                usernameError.textContent = data.username
-                usernameError.style.display = "block"
-             }
+                     if (data.username) {
+                        usernameError.textContent = data.username
+                        usernameError.style.display = "block"
+                     }
 
 
-          }
+                  }
 
-          if (data.user) {
-             location.assign("/login")
-          }
+                  if (data.user) {
+                     location.assign("/login")
+                  }
 
-       } catch (err) {
-          console.log("ERR::", err)
-       }
-    })
- </script>
+               } catch (err) {
+                  console.log("ERR::", err)
+               }
+            })
+         </script>
 
-
- <%- include("partials/_footer") %>
+         <%- include("partials/_footer") %>

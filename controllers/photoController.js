@@ -1,17 +1,17 @@
-import Photo from '../models/photoModels.js';
+import Photo from '../models/photoModel.js';
 import { v2 as cloudinary } from 'cloudinary';
 import fs from 'fs';
 
 const createPhoto = async (req, res) => {
-  const result = await cloudinary.uploader.upload(
-    req.files.image.tempFilePath,
-    {
-      use_filename: true,
-      folder: 'bitirmeProjesiBlogSitesi',
-    }
-  );
-
   try {
+    const result = await cloudinary.uploader.upload(
+      req.files.image.tempFilePath,
+      {
+        use_filename: true,
+        folder: 'bitirmeProjesiBlogSitesi',
+      }
+    );
+
     await Photo.create({
       name: req.body.name,
       description: req.body.description,
@@ -24,6 +24,7 @@ const createPhoto = async (req, res) => {
 
     res.status(201).redirect('/users/dashboard');
   } catch (error) {
+    console.error('Error in createPhoto:', error);
     res.status(500).json({
       succeded: false,
       error,
@@ -41,6 +42,7 @@ const getAllPhotos = async (req, res) => {
       link: 'photos',
     });
   } catch (error) {
+    console.error('Error in getAllPhotos:', error);
     res.status(500).json({
       succeded: false,
       error,
@@ -64,6 +66,7 @@ const getAPhoto = async (req, res) => {
       isOwner,
     });
   } catch (error) {
+    console.error('Error in getAPhoto:', error);
     res.status(500).json({
       succeded: false,
       error,
@@ -78,10 +81,11 @@ const deletePhoto = async (req, res) => {
     const photoId = photo.image_id;
 
     await cloudinary.uploader.destroy(photoId);
-    await Photo.findOneAndRemove({ _id: req.params.id });
+    await Photo.findOneAndDelete({ _id: req.params.id });
 
     res.status(200).redirect('/users/dashboard');
   } catch (error) {
+    console.error('Error in deletePhoto:', error);
     res.status(500).json({
       succeded: false,
       error,
@@ -114,10 +118,11 @@ const updatePhoto = async (req, res) => {
     photo.name = req.body.name;
     photo.description = req.body.description;
 
-    photo.save();
+    await photo.save();
 
     res.status(200).redirect(`/photos/${req.params.id}`);
   } catch (error) {
+    console.error('Error in updatePhoto:', error);
     res.status(500).json({
       succeded: false,
       error,

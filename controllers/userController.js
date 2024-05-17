@@ -1,7 +1,7 @@
 import User from '../models/userModel.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import Photo from '../models/photoModels.js';
+import Photo from '../models/photoModel.js';
 
 const createUser = async (req, res) => {
   try {
@@ -13,7 +13,7 @@ const createUser = async (req, res) => {
     let errors2 = {};
 
     if (error.code === 11000) {
-      errors2.email = 'E-posta zaten kayıtlı';
+      errors2.email = 'The Email is already registered';
     }
 
     if (error.name === 'ValidationError') {
@@ -28,9 +28,9 @@ const createUser = async (req, res) => {
 
 const loginUser = async (req, res) => {
   try {
-    const { name, password } = req.body;
+    const { username, password } = req.body;
 
-    const user = await User.findOne({ name });
+    const user = await User.findOne({ username });
 
     let same = false;
 
@@ -39,7 +39,7 @@ const loginUser = async (req, res) => {
     } else {
       return res.status(401).json({
         succeded: false,
-        error: 'Böyle bir kullanıcı yok',
+        error: 'There is no such user',
       });
     }
 
@@ -54,7 +54,7 @@ const loginUser = async (req, res) => {
     } else {
       res.status(401).json({
         succeded: false,
-        error: 'Parolalar eşleşmiyor',
+        error: 'Paswords are not matched',
       });
     }
   } catch (error) {
@@ -178,4 +178,12 @@ const unfollow = async (req, res) => {
   }
 };
 
-export { createUser, loginUser, getDashboardPage, getAllUsers, getAUser, follow, unfollow };
+export {
+  createUser,
+  loginUser,
+  getDashboardPage,
+  getAllUsers,
+  getAUser,
+  follow,
+  unfollow,
+};

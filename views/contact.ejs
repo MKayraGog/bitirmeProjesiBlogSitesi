@@ -1,95 +1,90 @@
 <%- include("partials/_header") %>
 
-   <main>
-       <div class="container my-4">
-           <h2 class="my-3">Contact-Us</h2>
-           <div class="row g-2">
-               <div class="col-md-6">
-                   <iframe id="map" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12047.316769457497!2d29.0526574!3d40.9852209!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cac78dac1ac9a3%3A0xbd47329deac1fedf!2sMarmara%20%C3%9Cniversitesi%20G%C3%B6ztepe%20Yerle%C5%9Fkesi!5e0!3m2!1str!2str!4v1708772936172!5m2!1str!2str" width="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-               </div>
-               <div class="col-md-6">
-                   <div class="card bg-dark">
-                       <div class="card-body">
-                           <div class="alert alert-warning">
-                               Lütfen formu doldurun.
+   <body class="main-layout inner_page">
+
+      <div class="loader_bg">
+         <div class="loader"><img src="images/loading.gif" alt="#" /></div>
+      </div>
+
+      <%- include("partials/_menu") %>
+
+         <div class="contact">
+            <div class="container">
+               <div class="row">
+                  <div class="col-md-12 ">
+                     <div class="titlepage text_align_center">
+                        <h2>Requste A Call Back</h2>
+                     </div>
+                  </div>
+                  <div class="col-md-8 offset-md-2">
+                     <form id="request" class="main_form" action="/contact" method="POST">
+
+                        <div class="col-md-12">
+                           <div style="display:none ;" class="alert alert-success" id="sendMessage"></div>
+                        </div>
+
+                        <div class="row">
+                           <div class="col-md-12">
+                              <input class="form_control" placeholder="Your name" type="text" name="name">
                            </div>
-                           <form class="row g-3 text-dark">
-                               <div class="col-md-6">
-                                   <label for="email" class="form-label">E-mail</label>
-                                   <input type="email" name="email" id="email" class="form-control">
-                               </div>
-                               <div class="col-md-6">
-                                   <label for="name" class="form-label">Name</label>
-                                   <input type="text" name="Name" id="Name" class="form-control">
-                               </div>
-                               <div class="col-md-12">
-                                   <label for="name" class="form-label">Phone</label>
-                                   <input type="text" name="phone" id="phone" class="form-control">
-                               </div>
-                               <div class="col-md-12">
-                                   <label for="subject" class="form-label">Subject</label>
-                                   <input type="text" name="subject" id="subject" class="form-control">
-                               </div>
-                               <div class="col-md-12">
-                                   <label for="message" class="form-label">Message</label>
-                                   <textarea name="message" id="message"  class="form-control"></textarea>
-                               </div>
-                               <div class="col-12">
-                                   <button class="btn btn-outline-dark" style="width:100%">Send Message</button>
-                               </div>
+                           <div class="col-md-12">
+                              <input class="form_control" placeholder="Email" type="email" name="email">
+                           </div>
+                           <div class="col-md-12">
+                              <input class="form_cont" placeholder="Message" type="type" name="message">
+                           </div>
+                           <div class="col-md-12">
+                              <div class="group_form">
+                                 <button class="send_btn">Send</button>
+                              </div>
+                           </div>
+                        </div>
+                     </form>
+                  </div>
+               </div>
+            </div>
+         </div>
 
-                           </form>
-                       </div>
-                   </div>
-           </div>
+         <script>
+            const form = document.querySelector('form')
+            const sendMessage = document.querySelector('#sendMessage')
 
-       </div>
-   </main>
+            form.addEventListener("submit", async (e) => {
+               e.preventDefault();
 
-   <script>
-    const form = document.querySelector('form')
-    const sendMessage = document.querySelector('#sendMessage')
+               const name = form.name.value
+               const email = form.email.value
+               const message = form.message.value
 
-    form.addEventListener("submit", async (e) => {
-       e.preventDefault();
+               try {
+                  const res = await fetch('/contact', {
+                     method: "POST",
+                     body: JSON.stringify({ name, email, message }),
+                     headers: { "Content-Type": "application/json" }
+                  })
 
-       const name = form.name.value
-       const email = form.email.value
-       const message = form.message.value
+                  const data = await res.json();
 
-       try {
-          const res = await fetch('/contact', {
-             method: "POST",
-             body: JSON.stringify({ name, email, message }),
-             headers: { "Content-Type": "application/json" }
-          })
+                  console.log("DATA", data)
 
-          const data = await res.json();
+                  if (data.succeeded) {
 
-          console.log("DATA", data)
+                     sendMessage.textContent = "Your Message Received Succsfully"
+                     sendMessage.style.display = "block"
 
-          if (data.succeeded) {
+                     setTimeout(() => {
+                        sendMessage.style.display = "none"
+                        form.name.value = ""
+                        form.email.value = ""
+                        form.message.value = ""
 
-             sendMessage.textContent = "Your Message Received Succsfully"
-             sendMessage.style.display = "block"
+                     }, 5000)
+                  }
 
-             setTimeout(() => {
-                sendMessage.style.display = "none"
-                form.name.value = ""
-                form.email.value = ""
-                form.message.value = ""
+               } catch (err) {
+                  console.log("ERR::", err)
+               }
+            })
+         </script>
 
-             }, 5000)
-
-
-
-          }
-
-
-       } catch (err) {
-          console.log("ERR::", err)
-       }
-    })
- </script>
-
- <%- include("partials/_footer") %>
+         <%- include("partials/_footer") %>

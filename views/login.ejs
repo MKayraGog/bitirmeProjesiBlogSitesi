@@ -1,38 +1,40 @@
 <%- include("partials/_header") %>
-<main>
-    <div class="container my-4">
-        <h2 class="my-3">Login</h2>
-        <div class="row g-2">
-            <div class="col-md-6">
-            </div>
-            <div class="col-md-6">
-                <div class="card bg-dark">
-                    <div class="card-body">
-                        <div class="alert alert-warning">
-                            Lütfen formu doldurun.
-                        </div>
-                        <form class="row g-3 text-dark" action="/users/login" method="POST">
-                            <div class="col-md-6">
-                                <label for="email" class="form-label">E-mail</label>
-                                <input type="email" name="email" id="email" class="form-control">
-                            </div>
-                            <div class="col-md-6">
-                                <label for="name" class="form-label">Name</label>
-                                <input type="text" name="name" id="name" class="form-control">
-                            </div>
-                            <div class="col-md-12">
-                                <label for="password" class="form-label">Password</label>
-                                <input type="password" name="password" id="password" class="form-control">
-                            </div>
 
-                            <div class="col-12">
-                                <button type="submit" class="btn btn-outline-dark" style="width:100%">Giriş Yap</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
+   <body class="main-layout inner_page">
+
+      <div class="loader_bg">
+         <div class="loader"><img src="images/loading.gif" alt="#" /></div>
+      </div>
+
+      <%- include("partials/_menu") %>
+
+         <div class="contact">
+            <div class="container">
+               <div class="row">
+                  <div class="col-md-12 ">
+                     <div class="titlepage text_align_center">
+                        <h2>Login</h2>
+                     </div>
+                  </div>
+                  <div class="col-md-8 offset-md-2">
+                     <form id="request" class="main_form" action="users/login" method="POST">
+                        <div class="row">
+                           <div class="col-md-12">
+                              <input class="form_control" placeholder="Username" type="text" name="username">
+                           </div>
+                           <div class="col-md-12">
+                              <input class="form_control" placeholder="Password" type="password" name="password">
+                           </div>
+                           <div class="col-md-12">
+                              <div class="group_form">
+                                 <button class="send_btn">Login</button>
+                              </div>
+                           </div>
+                        </div>
+                     </form>
+                  </div>
+               </div>
             </div>
-        </div>
-    </div>
-</main>
-<%- include("partials/_footer") %>
+         </div>
+        
+         <%- include("partials/_footer") %>
