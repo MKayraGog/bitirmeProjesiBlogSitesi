@@ -251,7 +251,7 @@ button {
 
 .read_more {
     font-size: 17px;
-    background: #f6388e;
+    background: #121481;
     max-width: 266px;
     width: 100%;
     transition: ease-in all 0.5s;
@@ -265,7 +265,7 @@ button {
 }
 
 .read_more:hover {
-    background: #fff;
+    background: #5BBCFF;
     color: #000;
 }
 
@@ -319,7 +319,7 @@ button {
 
 .header-area {
     width: 100%;
-    border-top: #f6388e solid 16px;
+    border-top: #121481 solid 16px;
     background: #fff;
     height: 100px;
     padding: 23px 20px;
@@ -335,7 +335,7 @@ button {
 
 }
 .logo a span {
-    color: #f6388e;
+    color: #121481;
 }
 .navbar-area {
     float: left;
@@ -366,10 +366,10 @@ button {
 }
 
 .site-navbar ul li a:hover {
-    color: #f6388e;
+    color: #121481;
 }
 .site-navbar ul li a.active {
-    color: #f6388e;
+    color: #121481;
 }
 
 /* navbar regular css end */
@@ -663,7 +663,7 @@ ul.email li i {
     width: 122px;
     height: 122px;
     line-height: 122px;
-    background: #f6388e;
+    background: #121481;
     color: #fff;
     font-weight: bold;
     font-size: 60px;
@@ -753,7 +753,7 @@ ul.email li i {
     text-transform: uppercase;
 }
 .craig span {
-    color:#f6388e;
+    color:#5BBCFF;
     text-transform: uppercase;
     font-size: 20px;
     line-height: 23px;
@@ -843,7 +843,7 @@ ul.social_icon li a i:hover {
 }
 .group_form .send_btn {
     font-size: 18px;
-    transition: ease-in all 0.5s;
+    transition: ease-in all 0.2s;
     background-color: #2a2929;
     color: #fff;
     max-width: 159px;
@@ -856,7 +856,7 @@ ul.social_icon li a i:hover {
 }
 
 .group_form .send_btn:hover {
-    background-color: #fa3e8a;
+    background-color: #121481;
     transition: ease-in all 0.5s;
     color: #fff;
 }
@@ -892,13 +892,13 @@ ul.menu_footer li a {
     transition: ease-in all 0.5s;
 }
 ul.menu_footer li a.active {
-    color: #fa3e8a;
-    border-bottom: #f6388e solid 3px;
+    color: #121481;
+    border-bottom: #5BBCFF solid 3px;
 
 }
 ul.menu_footer li a:hover {
-    color: #fa3e8a;
-    border-bottom: #f6388e solid 2px;
+    color: #121481;
+    border-bottom: #5BBCFF solid 2px;
     transition: ease-in all 0.5s;
 }
 
@@ -929,8 +929,8 @@ ul.top_infomation li a {
 }
 
 ul.top_infomation li a i:hover {
-    background: #f6388e;
-    transition: ease-in all 0.5s;
+    background: #121481;
+    transition: ease-in all 0.2s;
 }
 
 .copyright {
@@ -956,7 +956,7 @@ ul.top_infomation li a i:hover {
 }
 
 .copyright a:hover {
-    color: #f6388e;
+    color: #121481;
 }
 
 ul.social_icon_bottom {
@@ -974,7 +974,7 @@ ul.social_icon_bottom li a i {
     text-align: center;
 }
 ul.social_icon_bottom li a i:hover {
-    color: #f6388e;
+    color: #121481;
     transition: ease-in all 0.5s;
 }
 
@@ -985,7 +985,7 @@ ul.social_icon_bottom li a i:hover {
 /**  inner page css **/
 
 .inner_page .header-area {
-    box-shadow: #f6388ec7 0 0 10px 0px;
+    box-shadow: #121481 0 0 10px 0px;
     margin-bottom: 10px;
 }
 
