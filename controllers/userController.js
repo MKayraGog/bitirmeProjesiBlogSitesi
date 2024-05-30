@@ -2,6 +2,8 @@ import User from '../models/userModel.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import Photo from '../models/photoModel.js';
+import crypto from 'crypto';
+import nodemailer from 'nodemailer';
 
 const createUser = async (req, res) => {
   try {
@@ -123,7 +125,7 @@ const getAUser = async (req, res) => {
 };
 
 const follow = async (req, res) => {
-  // res.locals.user._id
+  
   try {
     let user = await User.findByIdAndUpdate(
       { _id: req.params.id },
@@ -151,7 +153,7 @@ const follow = async (req, res) => {
 };
 
 const unfollow = async (req, res) => {
-  // res.locals.user._id
+  
   try {
     let user = await User.findByIdAndUpdate(
       { _id: req.params.id },
@@ -178,6 +180,72 @@ const unfollow = async (req, res) => {
   }
 };
 
+const forgotPassword = async (req, res) => {
+  try {
+    const { email } = req.body;
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    const resetToken = crypto.randomBytes(20).toString('hex');
+    user.resetPasswordToken = resetToken;
+    user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+    await user.save();
+
+    const resetURL = `http://${req.headers.host}/users/resetPassword/${resetToken}`;
+    const message = `You are receiving this email because you (or someone else) have requested the reset of a password. Please make a put request to: \n\n ${resetURL}`;
+
+    let transporter = nodemailer.createTransport({
+      host: 'smtp-mail.outlook.com',
+      port: 587,
+      secure: false,
+      auth: {
+        user: process.env.NODE_MAIL,
+        pass: process.env.NODE_PASS,
+      },
+    });
+
+    await transporter.sendMail({
+      to: email,
+      subject: 'Password reset token',
+      text: message,
+    });
+
+    res.status(200).json({ message: 'Email sent' });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error });
+  }
+};
+
+const resetPassword = async (req, res) => {
+  try {
+    const user = await User.findOne({
+      resetPasswordToken: req.params.token,
+      resetPasswordExpires: { $gt: Date.now() },
+    });
+
+    if (!user) {
+      return res.status(400).json({ message: 'Password reset token is invalid or has expired' });
+    }
+
+    const { password } = req.body;
+
+    user.password = password;
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpires = undefined;
+
+    await user.save();
+
+    res.status(200).json({ message: 'Password has been reset' });
+  } catch (err) {
+    res.status(500).json({ message: 'Error resetting password', err });
+  }
+};
+
+
+  
 export {
   createUser,
   loginUser,
@@ -186,4 +254,6 @@ export {
   getAUser,
   follow,
   unfollow,
+  forgotPassword,
+  resetPassword,
 };

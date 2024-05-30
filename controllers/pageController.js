@@ -30,7 +30,7 @@ const getRegisterPage = (req, res) => {
 
 const getLoginPage = (req, res) => {
   res.render('login', {
-    link: 'login',
+    link: 'login',  
   });
 };
 
@@ -39,6 +39,15 @@ const getLogout = (req, res) => {
     maxAge: 1,
   });
   res.redirect('/');
+};
+
+const getForgotPasswordPage = (req, res) => {
+  res.render('forgotPassword', { message: null });
+};
+
+const getResetPasswordPage = (req, res) => {
+  const token = req.params.token;
+  res.render('resetPassword', { token, message: null });
 };
 
 const getContactPage = (req, res) => {
@@ -208,12 +217,15 @@ const sendMail = async (req, res) => {
   }
 };
 
+
 export {
   getIndexPage,
   getAboutPage,
   getRegisterPage,
   getLoginPage,
   getLogout,
+  getForgotPasswordPage,
+  getResetPasswordPage,
   getContactPage,
   sendMail,
 };

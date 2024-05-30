@@ -18,16 +18,16 @@ cloudinary.config({
   api_secret: process.env.CLOUD_API_SECRET,
 });
 
-//connection to the DB
+// Connection to the DB
 conn();
 
 const app = express();
 const port = process.env.PORT;
 
-//ejs template engine
+// EJS template engine
 app.set('view engine', 'ejs');
 
-//static files middleware
+// Static files middleware
 app.use(express.static('public'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -39,7 +39,6 @@ app.use(
   })
 );
 
-//routes
 app.use('*', checkUser);
 app.use('/', pageRoute);
 app.use('/photos', photoRoute);

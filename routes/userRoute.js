@@ -1,11 +1,19 @@
 import express from 'express';
 import * as userController from '../controllers/userController.js';
 import * as authMiddleware from '../middlewares/authMiddleware.js';
+import * as pageController from '../controllers/pageController.js';
 
 const router = express.Router();
 
 router.route('/register').post(userController.createUser);
 router.route('/login').post(userController.loginUser);
+
+router.route('/forgotPassword')
+  .get(pageController.getForgotPasswordPage)
+  .post(userController.forgotPassword);
+router.route('/resetPassword/:token')
+  .get(pageController.getResetPasswordPage)
+  .post(userController.resetPassword);
 router
   .route('/dashboard')
   .get(authMiddleware.authenticateToken, userController.getDashboardPage);

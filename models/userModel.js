@@ -35,6 +35,14 @@ const userSchema = new Schema(
         ref: 'User',
       },
     ],
+    resetPasswordToken: 
+    {
+      type: String,
+    },
+    resetPasswordExpires: 
+    {
+      type: Date,
+    },
   },
   {
     timestamps: true,
@@ -43,7 +51,16 @@ const userSchema = new Schema(
 
 userSchema.pre('save', function (next) {
   const user = this;
+
+  // Şifre sadece değiştirildiğinde hashlenir
+  if (!user.isModified('password')) {
+    return next();
+  }
+  // Şifreyi hashle
   bcrypt.hash(user.password, 10, (err, hash) => {
+    if (err) {
+      return next(err);
+    }
     user.password = hash;
     next();
   });
