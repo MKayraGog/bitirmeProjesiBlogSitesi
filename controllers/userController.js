@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken';
 import Photo from '../models/photoModel.js';
 import crypto from 'crypto';
 import nodemailer from 'nodemailer';
+import { v2 as cloudinary } from 'cloudinary';
 
 const createUser = async (req, res) => {
   try {
@@ -244,6 +245,34 @@ const resetPassword = async (req, res) => {
   }
 };
 
+const uploadProfilPhoto = async (req, res) => {
+  try {
+    const userId = req.user.id; // Kullanıcı kimliğini alın (bu kimlik authenticateToken tarafından ayarlanır)
+    const file = req.files.profilePhoto; // Dosyayı alın
+
+    if (!file) {
+      throw new Error('No file uploaded');
+    }
+
+    // Cloudinary'ye yükleyin
+    const result = await cloudinary.uploader.upload(file.tempFilePath, {
+      folder: 'bitirmeProjesiBlogSitesi',
+    });
+
+    // Kullanıcı belgesini güncelleyin
+    const user = await User.findById(userId);
+    user.profilePhoto = result.secure_url; // Profil fotoğrafı URL'sini kaydedin
+    await user.save();
+
+    res.status(200).json({ success: true, message: 'Profile photo uploaded successfully' });
+  } catch (error) {
+    console.error('Error uploading profile photo:', error);
+    res.status(500).json({ success: false, message: 'Profile photo upload failed', error: error.message });
+  }
+};
+
+
+
 
   
 export {
@@ -256,4 +285,5 @@ export {
   unfollow,
   forgotPassword,
   resetPassword,
+  uploadProfilPhoto,
 };

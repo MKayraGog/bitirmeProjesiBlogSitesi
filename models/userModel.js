@@ -43,6 +43,11 @@ const userSchema = new Schema(
     {
       type: Date,
     },
+    profilePhoto: 
+    {
+      type: String, 
+    },
+
   },
   {
     timestamps: true,

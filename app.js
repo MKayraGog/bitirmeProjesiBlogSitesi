@@ -9,6 +9,7 @@ import userRoute from './routes/userRoute.js';
 import { checkUser } from './middlewares/authMiddleware.js';
 import fileUpload from 'express-fileupload';
 import { v2 as cloudinary } from 'cloudinary';
+import cloudinaryHelper from 'cloudinary/lib/cloudinary.js';
 
 dotenv.config();
 
@@ -38,6 +39,12 @@ app.use(
     methods: ['POST', 'GET'],
   })
 );
+
+// Middleware to pass Cloudinary helper to views
+app.use((req, res, next) => {
+  res.locals.cloudinary = cloudinaryHelper;
+  next();
+});
 
 app.use('*', checkUser);
 app.use('/', pageRoute);

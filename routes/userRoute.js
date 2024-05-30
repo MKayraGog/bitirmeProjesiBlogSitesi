@@ -29,5 +29,8 @@ router
 router
   .route('/:id/unfollow')
   .put(authMiddleware.authenticateToken, userController.unfollow);
+router
+  .route('/uploadProfilPhoto')
+  .post(authMiddleware.authenticateToken, userController.uploadProfilPhoto);
 
 export default router;

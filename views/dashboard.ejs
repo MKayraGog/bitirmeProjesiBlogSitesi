@@ -30,7 +30,7 @@
                   it
                 </p>
                 <h3>The point of using </h3>
-                <i><img src="/images/custo.jpg" alt="#" /></i>
+                <i><img src="<%= user.profilePhoto %>" alt="Profile Photo" /></i>
               </div>
             </div>
           </div>
@@ -42,7 +42,6 @@
                 href="about.html">Add New Photo</button>
             </div>
           </div>
-
         </div>
       </div>
 
@@ -219,4 +218,16 @@
                     </div>
                   </div>
 
+                  <% if (user.profilePhoto) { %>
+                    <img src="<%= user.profilePhoto %>" alt="Profile Photo" style="width: 150px; height: 150px;">
+                <% } else { %>
+                    <p>No profile photo uploaded</p>
+                <% } %>
+            
+                <form action="/users/uploadProfilPhoto" method="POST" enctype="multipart/form-data">
+                    <label for="profilePhoto">Upload Profile Photo:</label>
+                    <input type="file" name="profilePhoto" id="profilePhoto" required>
+                    <button type="submit">Upload</button>
+                </form>
+            
                   <%- include("partials/_footer") %>
