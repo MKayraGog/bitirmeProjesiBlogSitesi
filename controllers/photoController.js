@@ -32,11 +32,21 @@ const createPhoto = async (req, res) => {
   }
 };
 
+// Rastgele sıralama işlevi
+const shuffleArray = (array) => {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+};
+
 const getAllPhotos = async (req, res) => {
   try {
-    const photos = res.locals.user
+    let photos = res.locals.user
       ? await Photo.find({ user: { $ne: res.locals.user._id } })
       : await Photo.find({});
+    photos = shuffleArray(photos);  // Fotoğrafları karıştır
     res.status(200).render('photos', {
       photos,
       link: 'photos',

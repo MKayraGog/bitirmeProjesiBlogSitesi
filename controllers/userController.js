@@ -272,9 +272,6 @@ const uploadProfilPhoto = async (req, res) => {
 };
 
 
-
-
-  
 export {
   createUser,
   loginUser,
