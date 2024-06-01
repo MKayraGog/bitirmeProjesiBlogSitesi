@@ -46,5 +46,12 @@ const authenticateToken = async (req, res, next) => {
     });
   }
 };
+function ensureAuthenticated(req, res, next) {
+  if (req.isAuthenticated()) { // Bu örnek Passport.js kullanılarak yapılmıştır
+      return next();
+  } else {
+      res.redirect('/login');
+  }
+}
 
-export { authenticateToken, checkUser };
+export { authenticateToken, checkUser,  };
