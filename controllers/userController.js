@@ -271,7 +271,73 @@ const uploadProfilPhoto = async (req, res) => {
   }
 };
 
+const changePassword = async (req, res) => {
+  try {
+    const { id } = req.user; // authenticateToken middleware'den gelen kullanıcı ID'si
+    const { currentPassword, newPassword } = req.body;
 
+    const user = await User.findById(id);
+
+    if (!user) {
+      return res.status(404).json({ success: false, message: 'User not found' });
+    }
+
+    // Mevcut parolayı doğrulama
+    const isMatch = await bcrypt.compare(currentPassword, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ success: false, message: 'Current password is incorrect' });
+    }
+
+    // Yeni parolayı hashleyip kaydetme
+    const salt = await bcrypt.genSalt(10);
+    user.password = await bcrypt.hash(newPassword, salt);
+    await user.save();
+
+    res.status(200).json({ success: true, message: 'Password changed successfully' });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Server error', error });
+  }
+};
+
+const updateBio = async (req, res) => {
+  try {
+    const { id } = req.user;
+    const { bio } = req.body;
+
+    const user = await User.findById(id);
+
+    if (!user) {
+      return res.status(404).json({ success: false, message: 'User not found' });
+    }
+
+    user.bio = bio;
+    await user.save();
+
+    res.status(200).json({ success: true, message: 'Bio updated successfully' });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Server error', error });
+  }
+};
+
+const updateProfileName = async (req, res) => {
+  try {
+    const { id } = req.user;
+    const { profileName } = req.body;
+
+    const user = await User.findById(id);
+
+    if (!user) {
+      return res.status(404).json({ success: false, message: 'User not found' });
+    }
+
+    user.profileName = profileName;
+    await user.save();
+
+    res.status(200).json({ success: true, message: 'Profile name updated successfully' });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Server error', error });
+  }
+};
 export {
   createUser,
   loginUser,
@@ -283,4 +349,7 @@ export {
   forgotPassword,
   resetPassword,
   uploadProfilPhoto,
+  changePassword,
+  updateBio,
+  updateProfileName,
 };

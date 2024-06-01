@@ -32,5 +32,14 @@ router
 router
   .route('/uploadProfilPhoto')
   .post(authMiddleware.authenticateToken, userController.uploadProfilPhoto);
+router
+  .route('/changePassword')
+  .post(authMiddleware.authenticateToken, userController.changePassword);
+router
+  .route('/updateBio')
+  .post(authMiddleware.authenticateToken, userController.updateBio);
+router
+  .route('/updateProfileName')
+  .post(authMiddleware.authenticateToken, userController.updateProfileName);
 
 export default router;

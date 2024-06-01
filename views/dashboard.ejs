@@ -21,15 +21,8 @@
           <div class="row">
             <div class="col-md-12">
               <div class="satteb text_align_center">
-                <p>fact that a reader will be distracted by the readable content of a page when looking at its
-                  layout. The point of using Lorem Ipsum is that itfact that a reader will be distracted by the
-                  readable content of a page when looking at its layout. The point of using Lorem Ipsum is that
-                  itfact that a reader will be distracted by the readable content of a page when looking at its
-                  layout. The point of using Lorem Ipsum is that itfact that a reader will be distracted by the
-                  readable content of a page when looking at its layout. The point of using Lorem Ipsum is that
-                  it
-                </p>
-                <h3>The point of using </h3>
+                <p><%= user.bio %></p>
+                <h3><%= user.profileName %> </h3>
                 <i><img src="<%= user.profilePhoto %>" alt="Profile Photo" /></i>
               </div>
             </div>
@@ -220,14 +213,40 @@
 
                   <% if (user.profilePhoto) { %>
                     <img src="<%= user.profilePhoto %>" alt="Profile Photo" style="width: 150px; height: 150px;">
-                <% } else { %>
-                    <p>No profile photo uploaded</p>
-                <% } %>
-            
-                <form action="/users/uploadProfilPhoto" method="POST" enctype="multipart/form-data">
-                    <label for="profilePhoto">Upload Profile Photo:</label>
-                    <input type="file" name="profilePhoto" id="profilePhoto" required>
-                    <button type="submit">Upload</button>
-                </form>
-            
-                  <%- include("partials/_footer") %>
+                    <% } else { %>
+                      <p>No profile photo uploaded</p>
+                      <% } %>
+
+                        <form action="/users/uploadProfilPhoto" method="POST" enctype="multipart/form-data">
+                          <label for="profilePhoto">Upload Profile Photo:</label>
+                          <input type="file" name="profilePhoto" id="profilePhoto" required>
+                          <button type="submit">Upload</button>
+                        </form>
+
+                        <form action="/users/changePassword" method="POST">
+                          <label for="currentPassword">Current Password:</label>
+                          <input type="password" id="currentPassword" name="currentPassword" required>
+
+                          <label for="newPassword">New Password:</label>
+                          <input type="password" id="newPassword" name="newPassword" required>
+
+                          <button type="submit">Change Password</button>
+                        </form>
+
+                        <form action="/users/updateBio" method="POST">
+                          <div class="form-group">
+                            <label for="bio">Bio</label>
+                            <textarea class="form-control" id="bio" name="bio" rows="5"><%= user.bio %></textarea>
+                          </div>
+                          <button type="submit" class="btn btn-primary">Save</button>
+                        </form>
+
+                        <form action="/users/updateProfileName" method="POST">
+                          <div class="form-group">
+                            <label for="profileName">Profile Name</label>
+                            <textarea class="form-control" id="profileName" name="profileName" rows="5"><%= user.profileName %></textarea>
+                          </div>
+                          <button type="submit" class="btn btn-primary">Save</button>
+                        </form>
+                      
+                        <%- include("partials/_footer") %>

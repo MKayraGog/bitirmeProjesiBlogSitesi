@@ -47,7 +47,14 @@ const userSchema = new Schema(
     {
       type: String, 
     },
-
+    bio: {
+      type: String,
+      default: 'Default bio...',
+    },
+    profileName: {
+      type: String,
+      default: 'Your name...',
+    },
   },
   {
     timestamps: true,
