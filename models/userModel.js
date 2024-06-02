@@ -58,8 +58,21 @@ const userSchema = new Schema(
   },
   {
     timestamps: true,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
   }
 );
+
+// Virtual for followers count
+userSchema.virtual('followersCount').get(function () {
+  return this.followers.length;
+});
+
+// Virtual for followings count
+userSchema.virtual('followingsCount').get(function () {
+  return this.followings.length;
+});
+
 
 userSchema.pre('save', function (next) {
   const user = this;

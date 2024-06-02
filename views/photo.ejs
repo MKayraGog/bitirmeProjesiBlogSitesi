@@ -8,6 +8,30 @@
 
       <%- include("partials/_menu") %>
 
+      <script>
+         async function toggleLike(photoId) {
+           try {
+             const response = await fetch(`/photos/${photoId}/like`, {
+               method: 'POST',
+               headers: {
+                 'Content-Type': 'application/json',
+               },
+               credentials: 'same-origin',
+             });
+     
+             if (response.ok) {
+               const data = await response.json();
+               document.getElementById('likesCount').innerText = data.likesCount;
+             } else {
+               console.error('Failed to toggle like:', response.statusText);
+             }
+           } catch (error) {
+             console.error('Error liking photo:', error);
+           }
+         }
+       </script>
+     
+       
          <div class="about">
             <div class="container">
                <div class="row">
@@ -23,6 +47,9 @@
                            Artist: <%= photo.user.username %>
                         </a>
 
+                        <p>Likes: <span id="likesCount"><%= photo.likesCount %></span></p>
+                        <button onclick="toggleLike('<%= photo._id %>')">Like/unlike</button>
+                        
                         <% if (isOwner) { %>
 
                            <div style="margin-top: 30px ;">

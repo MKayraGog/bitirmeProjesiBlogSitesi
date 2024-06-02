@@ -71,7 +71,7 @@ const getAPhoto = async (req, res) => {
     }
 
     res.status(200).render('photo', {
-      photo,
+      photo: photo.toObject(),
       link: 'photos',
       isOwner,
     });
@@ -140,4 +140,31 @@ const updatePhoto = async (req, res) => {
   }
 };
 
-export { createPhoto, getAllPhotos, getAPhoto, deletePhoto, updatePhoto };
+const likePhoto = async (req, res) => {
+  try {
+    const photo = await Photo.findById(req.params.id);
+
+    if (!photo) {
+      return res.status(404).send('Photo not found');
+    }
+
+    // Kullanıcının fotoğrafı daha önce beğenip beğenmediğini kontrol edin
+    const userId = req.user._id; // Kullanıcının kimlik doğrulaması yapıldığını ve req.user'ın doldurulduğunu varsayıyoruz
+    const index = photo.likes.indexOf(userId);
+
+    if (index === -1) {
+      // Kullanıcıyı beğenilere ekleyin
+      photo.likes.push(userId);
+    } else {
+      // Kullanıcıyı beğenilerden çıkarın
+      photo.likes.splice(index, 1);
+    }
+
+    await photo.save();
+
+    res.status(200).json({ likesCount: photo.likesCount });
+  } catch (err) {
+    res.status(500).send('Server error');
+  }
+};
+export { createPhoto, getAllPhotos, getAPhoto, deletePhoto, updatePhoto, likePhoto };

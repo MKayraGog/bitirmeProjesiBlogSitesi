@@ -28,6 +28,20 @@ const photoSchema = new Schema({
   image_id: {
     type: String,
   },
+  likes: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'User',
+    },
+  ],
+},{
+  toJSON: { virtuals: true },
+  toObject: { virtuals: true },
+});
+
+// Virtual for likes count
+photoSchema.virtual('likesCount').get(function () {
+  return this.likes.length;
 });
 
 const Photo = mongoose.model('Photo', photoSchema);
