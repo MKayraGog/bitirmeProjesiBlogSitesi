@@ -47,12 +47,32 @@ const userSchema = new Schema(
     {
       type: String, 
     },
-
+    bio: {
+      type: String,
+      default: 'Default bio...',
+    },
+    profileName: {
+      type: String,
+      default: 'Your name...',
+    },
   },
   {
     timestamps: true,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
   }
 );
+
+// Virtual for followers count
+userSchema.virtual('followersCount').get(function () {
+  return this.followers.length;
+});
+
+// Virtual for followings count
+userSchema.virtual('followingsCount').get(function () {
+  return this.followings.length;
+});
+
 
 userSchema.pre('save', function (next) {
   const user = this;

@@ -83,7 +83,7 @@ const getDashboardPage = async (req, res) => {
   res.render('dashboard', {
     link: 'dashboard',
     photos,
-    user,
+    user: user.toObject(),
   });
 };
 
@@ -271,6 +271,45 @@ const uploadProfilPhoto = async (req, res) => {
   }
 };
 
+const updateBio = async (req, res) => {
+  try {
+    const { id } = req.user;
+    const { bio } = req.body;
+
+    const user = await User.findById(id);
+
+    if (!user) {
+      return res.status(404).json({ success: false, message: 'User not found' });
+    }
+
+    user.bio = bio;
+    await user.save();
+
+    res.status(200).json({ success: true, message: 'Bio updated successfully' });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Server error', error });
+  }
+};
+
+const updateProfileName = async (req, res) => {
+  try {
+    const { id } = req.user;
+    const { profileName } = req.body;
+
+    const user = await User.findById(id);
+
+    if (!user) {
+      return res.status(404).json({ success: false, message: 'User not found' });
+    }
+
+    user.profileName = profileName;
+    await user.save();
+
+    res.status(200).json({ success: true, message: 'Profile name updated successfully' });
+  } catch (error) {
+    res.status(500).json({ success: false, message: 'Server error', error });
+  } 
+};
 
 export {
   createUser,
@@ -283,4 +322,6 @@ export {
   forgotPassword,
   resetPassword,
   uploadProfilPhoto,
+  updateBio,
+  updateProfileName,
 };
