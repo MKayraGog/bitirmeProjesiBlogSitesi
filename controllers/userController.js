@@ -5,6 +5,7 @@ import Photo from '../models/photoModel.js';
 import crypto from 'crypto';
 import nodemailer from 'nodemailer';
 import { v2 as cloudinary } from 'cloudinary';
+import fs from 'fs';
 
 const createUser = async (req, res) => {
   try {
@@ -84,6 +85,24 @@ const getDashboardPage = async (req, res) => {
     link: 'dashboard',
     photos,
     user: user.toObject(),
+  });
+};
+
+const getEditDashboardPage = async (req, res) => {
+  res.render('editDashboard', {
+    link: 'editDashboard',
+  });
+};
+
+const getFollowingPage = async (req, res) => {
+  res.render('following', {
+    link: 'following',
+  });
+};
+
+const getFollowersPage = async (req, res) => {
+  res.render('followers', {
+    link: 'followers',
   });
 };
 
@@ -247,22 +266,28 @@ const resetPassword = async (req, res) => {
 
 const uploadProfilPhoto = async (req, res) => {
   try {
-    const userId = req.user.id; // Kullanıcı kimliğini alın (bu kimlik authenticateToken tarafından ayarlanır)
-    const file = req.files.profilePhoto; // Dosyayı alın
+    const userId = req.user.id; 
+    const file = req.files.profilePhoto; 
 
     if (!file) {
       throw new Error('No file uploaded');
     }
 
-    // Cloudinary'ye yükleyin
+    const user = await User.findById(userId);
+
+    if (user.image_id) {
+      await cloudinary.uploader.destroy(user.image_id);
+    }
+
     const result = await cloudinary.uploader.upload(file.tempFilePath, {
       folder: 'bitirmeProjesiBlogSitesi',
     });
 
-    // Kullanıcı belgesini güncelleyin
-    const user = await User.findById(userId);
-    user.profilePhoto = result.secure_url; // Profil fotoğrafı URL'sini kaydedin
+    user.profilePhoto = result.secure_url; 
+    user.image_id = result.public_id; 
     await user.save();
+
+    fs.unlinkSync(file.tempFilePath);
 
     res.status(200).json({ success: true, message: 'Profile photo uploaded successfully' });
   } catch (error) {
@@ -315,6 +340,9 @@ export {
   createUser,
   loginUser,
   getDashboardPage,
+  getEditDashboardPage,
+  getFollowingPage,
+  getFollowersPage,
   getAllUsers,
   getAUser,
   follow,

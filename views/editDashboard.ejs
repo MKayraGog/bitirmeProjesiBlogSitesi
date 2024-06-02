@@ -1,0 +1,160 @@
+<%- include("partials/_header") %>
+
+    <body class="main-layout inner_page">
+
+        <div class="loader_bg">
+            <div class="loader"><img src="/images/loading.gif" alt="#" /></div>
+        </div>
+
+        <%- include("partials/_menu") %>
+
+            <!-- Profil Adı Güncelleme Butonu -->
+            <div class="row">
+                <div class="col-md-12 text_align_center">
+                    <button data-toggle="modal" data-target="#profileNameModal" type="button" style="margin-top: 20px;"
+                        class="btn btn-primary">
+                        Profil Adı Düzenle
+                    </button>
+                </div>
+            </div>
+
+            <!-- Biyografi Güncelleme Butonu -->
+            <div class="row">
+                <div class="col-md-12 text_align_center">
+                    <button data-toggle="modal" data-target="#bioModal" type="button" style="margin-top: 20px;"
+                        class="btn btn-secondary">
+                        Biyografi Düzenle
+                    </button>
+                </div>
+            </div>
+
+            <!-- Profil Fotoğrafı Yükleme Butonu -->
+            <div class="row">
+                <div class="col-md-12 text_align_center">
+                    <button data-toggle="modal" data-target="#profilePhotoModal" type="button" style="margin-top: 20px;"
+                        class="btn btn-success">
+                        Profil Fotoğrafı Yükle
+                    </button>
+                </div>
+            </div>
+
+            <!-- Profil Adı Güncelleme Modal -->
+            <div class="modal fade" id="profileNameModal" tabindex="-1" role="dialog"
+                aria-labelledby="profileNameModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="profileNameModalLabel">Profil Adı Düzenle</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="profileNameForm" method="POST" action="/users/updateProfileName">
+                                <div class="form-group">
+                                    <label for="profileName">Profile Name</label>
+                                    <input type="text" class="form-control" id="profileName" name="profileName"
+                                        value="<%= user.profileName %>">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Biyografi Güncelleme Modal -->
+            <div class="modal fade" id="bioModal" tabindex="-1" role="dialog" aria-labelledby="bioModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="bioModalLabel">Biyografi Düzenle</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="bioForm" method="POST" action="/users/updateBio">
+                                <div class="form-group">
+                                    <label for="bio">Bio</label>
+                                    <textarea class="form-control" id="bio" name="bio"
+                                        rows="3"><%= user.bio %></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profil Fotoğrafı Yükleme Modal -->
+            <div class="modal fade" id="profilePhotoModal" tabindex="-1" role="dialog"
+                aria-labelledby="profilePhotoModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="profilePhotoModalLabel">Profil Fotoğrafı Yükle</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="profilePhotoForm" method="POST" action="/users/uploadProfilPhoto"
+                                enctype="multipart/form-data">
+                                <div class="form-group">
+                                    <label for="profilePhoto">Profile Photo</label>
+                                    <input type="file" class="form-control-file" id="profilePhoto" name="profilePhoto">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Upload Photo</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Profil Şifre Değiştirme Butonu -->
+            <div class="row">
+                <div class="col-md-12 text_align_center">
+                    <button data-toggle="modal" data-target="#changePasswordModal" type="button"
+                        style="margin-top: 20px; margin-left: 50%; transform: translateX(-50%);"
+                        class="btn btn-warning">
+                        Change Password
+                    </button>
+                </div>
+            </div>
+
+            <!-- Şifre Değiştirme Modal -->
+            <div class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog"
+                aria-labelledby="changePasswordModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="changePasswordModalLabel">Change Password</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="changePasswordForm" method="POST" action="/users/changePassword">
+                                <div class="form-group">
+                                    <label for="currentPassword">Current Password</label>
+                                    <input type="password" class="form-control" id="currentPassword"
+                                        name="currentPassword" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="newPassword">New Password</label>
+                                    <input type="password" class="form-control" id="newPassword" name="newPassword"
+                                        required>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Change Password</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <%- include("partials/_footer") %>

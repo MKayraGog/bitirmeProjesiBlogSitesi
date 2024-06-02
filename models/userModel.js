@@ -47,6 +47,9 @@ const userSchema = new Schema(
     {
       type: String, 
     },
+    image_id: {
+      type: String,
+    },
     bio: {
       type: String,
       default: 'Default bio...',

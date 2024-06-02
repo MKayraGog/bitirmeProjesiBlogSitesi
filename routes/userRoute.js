@@ -18,6 +18,15 @@ router
   .route('/dashboard')
   .get(authMiddleware.authenticateToken, userController.getDashboardPage);
 router
+  .route('/editDashboard')
+  .get(authMiddleware.authenticateToken, userController.getEditDashboardPage);
+router
+  .route('/:id/following')
+  .get(authMiddleware.authenticateToken, userController.getFollowingPage);
+router
+  .route('/:id/followers')
+  .get(authMiddleware.authenticateToken, userController.getFollowersPage);
+router
   .route('/')
   .get(authMiddleware.authenticateToken, userController.getAllUsers);
 router

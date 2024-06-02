@@ -147,16 +147,13 @@ const likePhoto = async (req, res) => {
     if (!photo) {
       return res.status(404).send('Photo not found');
     }
-
-    // Kullanıcının fotoğrafı daha önce beğenip beğenmediğini kontrol edin
-    const userId = req.user._id; // Kullanıcının kimlik doğrulaması yapıldığını ve req.user'ın doldurulduğunu varsayıyoruz
+    
+    const userId = req.user._id; 
     const index = photo.likes.indexOf(userId);
 
     if (index === -1) {
-      // Kullanıcıyı beğenilere ekleyin
       photo.likes.push(userId);
     } else {
-      // Kullanıcıyı beğenilerden çıkarın
       photo.likes.splice(index, 1);
     }
 
