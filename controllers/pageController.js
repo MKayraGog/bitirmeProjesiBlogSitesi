@@ -217,7 +217,6 @@ const sendMail = async (req, res) => {
   }
 };
 
-
 export {
   getIndexPage,
   getAboutPage,

@@ -16,7 +16,7 @@
                      <div class="col-md-5">
                         <div class="creative">
                            <h1>Lega Kayra</h1>
-                           <a class="read_more" href="/contact">Contact Us</a>
+
                         </div>
                      </div>
                      <div class="col-md-7">
@@ -28,52 +28,23 @@
                               <li data-target="#banner1" data-slide-to="2"></li>
                            </ol>
                            <div class="carousel-inner">
-                             
-                              <div class="carousel-item active">
-                                 <div class="container">
-                                    <div class="carousel-caption relative">
-                                       <div class="row d_flex">
-                                          <div class="col-md-12">
-                                             <div class="cemara">
-                                                <figure><img src="<% if (photos && photos.length > 0) { %>
-                                                    <figure><img src="<%= photos[0].url %>" alt="#" /></figure>
-                                                <% } else { %>
-                                                    <p>No photos available</p>
-                                                <% } %>" alt="#" /></figure>
+                              <% for(photo in photos){ %>
+                                 <div class="carousel-item <%= Object.keys(photos)[0] === photo ? "active" : "" %>">
+                                    <div class="container">
+                                       <div class="carousel-caption relative">
+                                          <div class="row d_flex">
+                                             <div class="col-md-12">
+                                                <div class="cemara">
+                                                   <figure>
+                                                       <img style="max-height: 128px;" src="<%= photos[photo].url %>" alt="#" />
+                                                   </figure>
+                                                </div>
                                              </div>
                                           </div>
                                        </div>
                                     </div>
                                  </div>
-                              </div>
-
-                              <div class="carousel-item">
-                                 <div class="container">
-                                    <div class="carousel-caption relative">
-                                       <div class="row d_flex">
-                                          <div class="col-md-12">
-                                             <div class="cemara">
-                                                <figure><img src="" alt="#" /></figure>
-                                             </div>
-                                          </div>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
-
-                              <div class="carousel-item">
-                                 <div class="container">
-                                    <div class="carousel-caption relative">
-                                       <div class="row d_flex">
-                                          <div class="col-md-12">
-                                             <div class="cemara">
-                                                <figure><img src="" alt="#" /></figure>
-                                             </div>
-                                          </div>
-                                       </div>
-                                    </div>
-                                 </div>
-                              </div>
+                              <% } %>
                            </div>
 
                            <a class="carousel-control-prev" href="#banner1" role="button" data-slide="prev">
@@ -111,7 +82,7 @@
                               <img src="<%= photo.url %>" alt="<%= photo.name %>">
                               <div class="view_main">
                                  <div class="pose">
-                                    <a class="read_more" href="<%= photo.url %>"><img src="images/ga.png" alt="#" /></a>
+                                    <a class="read_more" href="photos/<%= photo._id %>"><img src="images/ga.png" alt="#" /></a>
                                     <p>
                                        <%= photo.description.substring(0, 80)+ "..." %>
                                     </p>

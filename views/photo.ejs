@@ -21,7 +21,13 @@
      
              if (response.ok) {
                const data = await response.json();
+               let currentStatus = document.getElementById("likeButton").innerText;
+               let newStatus = currentStatus == "Like" ? "Unlike" : "Like";
+
+
                document.getElementById('likesCount').innerText = data.likesCount;
+               document.getElementById('likeButton').innerText = newStatus;
+
              } else {
                console.error('Failed to toggle like:', response.statusText);
              }
@@ -48,7 +54,7 @@
                         </a>
 
                         <p>Likes: <span id="likesCount"><%= photo.likesCount %></span></p>
-                        <button onclick="toggleLike('<%= photo._id %>')">Like/unlike</button>
+                        <button class="btn btn-sm btn-primary" onclick="toggleLike('<%= photo._id %>')" id="likeButton"><%= isLiked ? "Unlike" : "Like" %></button>
                         
                         <% if (isOwner) { %>
 
