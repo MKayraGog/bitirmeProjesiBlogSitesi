@@ -2,6 +2,9 @@ import nodemailer from 'nodemailer';
 import Photo from '../models/photoModel.js';
 import User from '../models/userModel.js';
 
+
+
+
 const getIndexPage = async (req, res) => {
   const photos = await Photo.find().sort({ uploadedAt: -1 }).limit(3);
 
@@ -53,6 +56,11 @@ const getResetPasswordPage = (req, res) => {
 const getContactPage = (req, res) => {
   res.render('contact', {
     link: 'contact',
+  });
+};
+const getSettingsPage = (req, res) => {
+  res.render('settings', {
+    link: 'settings',
   });
 };
 
@@ -227,5 +235,6 @@ export {
   getForgotPasswordPage,
   getResetPasswordPage,
   getContactPage,
+    getSettingsPage,
   sendMail,
 };

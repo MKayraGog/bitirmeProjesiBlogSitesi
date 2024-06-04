@@ -11,18 +11,18 @@
           <div class="navbar-area" style="float:right ;">
             <nav class="site-navbar">
               <ul>
-                <li><a class="<%= link === 'index' && 'active' %>" href="/">Home</a></li>
-                <li><a class="<%= link === 'about' && 'active' %>" href="/about">About</a></li>
-                <li><a class="<%= link === 'photos' && 'active' %>" href="/photos">Photos</a></li>
-                <li><a class="<%= link === 'contact' && 'active' %>" href="/contact">Contact</a></li>
+                <li><a class="<%= link === 'index' && 'active' %>" href="/">Ana Sayfa</a></li>
+                <li><a class="<%= link === 'about' && 'active' %>" href="/about">Hakkımızda</a></li>
+                <li><a class="<%= link === 'photos' && 'active' %>" href="/photos">Keşfet</a></li>
+                <li><a class="<%= link === 'contact' && 'active' %>" href="/contact">İletişim</a></li>
   
                 <% if (user) { %>
-                  <li><a class="<%= link === 'users' && 'active' %>" href="/users">Users</a></li>
-                  <li><a class="<%= link === 'dashboard' && 'active' %>" href="/users/dashboard">Dashboard</a></li>
-                  <li><a href="/logout">Logout</a></li>
+                  <li><a class="<%= link === 'users' && 'active' %>" href="/users">Kullanıcılar</a></li>
+                  <li><a class="<%= link === 'dashboard' && 'active' %>" href="/users/dashboard">Panel</a></li>
+                  <li><a href="/logout">Çıkış yap</a></li>
                   <% } else { %>
-                    <li><a class="<%= link === 'login' && 'active' %>" href="/login">Login</a></li>
-                    <li><a class="<%= link === 'register' && 'active' %>" href="/register">Register</a></li>
+                    <li><a class="<%= link === 'login' && 'active' %>" href="/login">Giriş yap</a></li>
+                    <li><a class="<%= link === 'register' && 'active' %>" href="/register">Kayıt ol</a></li>
                     <% }%>
               </ul>
 
