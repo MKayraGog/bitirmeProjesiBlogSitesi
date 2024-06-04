@@ -54,8 +54,7 @@ function ensureAuthenticated(req, res, next) {
   }
 }
 
-<<<<<<< HEAD
+
 export { authenticateToken, checkUser,  };
-=======
-export { authenticateToken, checkUser };
->>>>>>> ac803969c845b65d4d41546228268433c48633e9
+
+

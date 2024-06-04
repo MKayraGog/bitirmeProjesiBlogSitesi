@@ -65,15 +65,20 @@ const getAPhoto = async (req, res) => {
     const photo = await Photo.findById({ _id: req.params.id }).populate('user');
 
     let isOwner = false;
+    let isLiked = false;
 
     if (res.locals.user) {
       isOwner = photo.user.equals(res.locals.user._id);
+      isLiked = (photo.likes.indexOf(res.locals.user._id) !== -1);
     }
+
+
 
     res.status(200).render('photo', {
       photo: photo.toObject(),
       link: 'photos',
       isOwner,
+      isLiked,
     });
   } catch (error) {
     console.error('Error in getAPhoto:', error);
@@ -147,8 +152,9 @@ const likePhoto = async (req, res) => {
     if (!photo) {
       return res.status(404).send('Photo not found');
     }
-    
-    const userId = req.user._id; 
+
+
+    const userId = res.locals.user._id;
     const index = photo.likes.indexOf(userId);
 
     if (index === -1) {

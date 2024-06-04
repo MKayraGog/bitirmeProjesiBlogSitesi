@@ -108,7 +108,7 @@ const getFollowersPage = async (req, res) => {
 
 const getAllUsers = async (req, res) => {
   try {
-    const users = await User.find({ _id: { $ne: res.locals.user._id } });
+    const users = await User.find();
     res.status(200).render('users', {
       users,
       link: 'users',

@@ -1,368 +1,371 @@
 <%- include("partials/_header") %>
 
-  <body class="main-layout inner_page">
+<body class="main-layout inner_page">
 
-    <div class="loader_bg">
-      <div class="loader"><img src="/images/loading.gif" alt="#" /></div>
-    </div>
+<div class="loader_bg">
+    <div class="loader"><img src="/images/loading.gif" alt="#"/></div>
+</div>
 
-    <%- include("partials/_menu") %>
+<%- include("partials/_menu") %>
 
-      <div class="customers">
-        <div class="container">
-          <div class="row">
+<div class="customers">
+    <div class="container">
+        <div class="row">
             <div class="col-md-12">
-              <div class="titlepage text_align_center">
-                <h2>Welcome <%= user.username %>
-                </h2>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
-              <div class="satteb text_align_center">
-                <p><%= user.bio %></p>
-                <h3><%= user.profileName %> </h3>
-                <i><img src="<%= user.profilePhoto %>" alt="Profile Photo" /></i>
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-md-12 text_align_center">
-              <button data-toggle="modal" data-target=".bd-example-modal-lg" type="button"
-                style=" margin-top:100px; margin-left: 50%; transform: translateX(-50%);" class="read_more"
-                href="about.html">Add New Photo</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <% if (photos.length> 0 ) { %>
-        <div class="gallery">
-          <div class="container_with">
-            <div class="row">
-              <div class="col-md-12">
                 <div class="titlepage text_align_center">
-                  <h2>My Photos</h2>
+                    <h2>Hoşgeldiniz <%= user.username %>
+                    </h2>
                 </div>
-              </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="satteb text_align_center">
+                    <p><%= user.bio %></p>
+                    <h3><%= user.profileName %> </h3>
+                    <i><img src="<%= user.profilePhoto %>" alt="Profile Photo"/></i>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 text_align_center">
+                <button data-toggle="modal" data-target=".bd-example-modal-lg" type="button"
+                        style=" margin-top:100px; margin-left: 50%; transform: translateX(-50%);" class="read_more"
+                        href="about.html">Fotoğraf Yükle
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<% if (photos.length > 0 ) { %>
+    <div class="gallery">
+        <div class="container_with">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="titlepage text_align_center">
+                        <h2>Fotoğraflarım</h2>
+                    </div>
+                </div>
             </div>
             <div class="tz-gallery">
-              <div class="row">
-
-                <% for (photo of photos) { %>
-                  <div class="col-lg-4 col-md-6 ma_bottom30">
-                    <div class="lightbox">
-                      <img src="<%= photo.url %>" alt="<%= photo.name %>">
-                      <div class="view_main">
-                        <div class="pose">
-                          <a class="read_more" href="/photos/<%= photo._id %>"><img src="/images/ga.png" alt="#" /></a>
-                          <h3 style="padding-top:10px; padding-bottom:10px">
-                            <%= photo.name %>
-                          </h3>
-                          <p style="padding-top:10px;">
-                            <%= photo.description.substring(0, 80)+ "..." %>
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <% } %>
-
-              </div>
-            </div>
-          </div>
-        </div>
-        <% } %>
-
-          <% if (user.followers.length> 0 ) { %>
-            <div class="team">
-              <div class="container_with">
                 <div class="row">
-                  <div class="col-md-12">
-                    <div class="titlepage text_align_center">
-                      <h2>FOLLOWERS</h2>
-                    </div>
-                  </div>
 
-                  <% for (follower of user.followers) { %>
-
-                    <div class="col-md-4">
-                      <div class="team_box text_align_center">
-                        <div class="team_img">
-                          <figure><img src="/images/team1.jpg" alt="#" /></figure>
+                    <% for (photo of photos) { %>
+                        <div class="col-lg-4 col-md-6 ma_bottom30">
+                            <div class="lightbox">
+                                <img src="<%= photo.url %>" alt="<%= photo.name %>">
+                                <div class="view_main">
+                                    <div class="pose">
+                                        <a class="read_more" href="/photos/<%= photo._id %>"><img src="/images/ga.png"
+                                                                                                  alt="#"/></a>
+                                        <h3 style="padding-top:10px; padding-bottom:10px">
+                                            <%= photo.name %>
+                                        </h3>
+                                        <p style="padding-top:10px;">
+                                            <%= photo.description.substring(0, 80) + "..." %>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="craig">
-                          <h3>
-                            <%= follower.username %>
-                          </h3>
-                          <span>PHOTOGRAPHER</span>
-                          <ul class="social_icon ">
-                            <li><a href="Javascript:void(0)"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                            </li>
-                            <li><a href="Javascript:void(0)"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                            </li>
-                            <li><a href="/users/<%= follower._id %>"><i class="fa fa-external-link-square"
-                                  aria-hidden="true"></i></a>
-                            </li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
 
                     <% } %>
 
                 </div>
-              </div>
             </div>
-            <% } %>
+        </div>
+    </div>
+<% } %>
 
-              <% if (user.followings.length> 0 ) { %>
-                <div class="team">
-                  <div class="container_with">
-                    <div class="row">
-                      <div class="col-md-12">
-                        <div class="titlepage text_align_center">
-                          <h2>FOLLOWINGS</h2>
-                        </div>
-                      </div>
+<% if (user.followers.length > 0 ) { %>
+    <div class="team">
+        <div class="container_with">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="titlepage text_align_center">
+                        <h2>Takipçilerim</h2>
+                    </div>
+                </div>
 
-                      <% for (following of user.followings) { %>
+                <% for (follower of user.followers) { %>
 
-                        <div class="col-md-4">
-                          <div class="team_box text_align_center">
+                    <div class="col-md-4">
+                        <div class="team_box text_align_center">
                             <div class="team_img">
-                              <figure><img src="/images/team1.jpg" alt="#" /></figure>
+                                <figure><img src="/images/team1.jpg" alt="#"/></figure>
                             </div>
                             <div class="craig">
-                              <h3>
-                                <%= following.username %>
-                              </h3>
-                              <span>PHOTOGRAPHER</span>
-                              <ul class="social_icon ">
-                                <li><a href="Javascript:void(0)"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-                                </li>
-                                <li><a href="Javascript:void(0)"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                </li>
-                                <li><a href="/users/<%= following._id %>"><i class="fa fa-external-link-square"
-                                      aria-hidden="true"></i></a>
-                                </li>
-                              </ul>
+                                <h3>
+                                    <%= follower.username %>
+                                </h3>
+                                <span>PHOTOGRAPHER</span>
+                                <ul class="social_icon ">
+                                    <li><a href="Javascript:void(0)"><i class="fa fa-facebook"
+                                                                        aria-hidden="true"></i></a>
+                                    </li>
+                                    <li><a href="Javascript:void(0)"><i class="fa fa-twitter"
+                                                                        aria-hidden="true"></i></a>
+                                    </li>
+                                    <li><a href="/users/<%= follower._id %>"><i class="fa fa-external-link-square"
+                                                                                aria-hidden="true"></i></a>
+                                    </li>
+                                </ul>
                             </div>
-                          </div>
                         </div>
-
-                        <% } %>
-
                     </div>
-                  </div>
-                </div>
+
                 <% } %>
 
-                  <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
-                    aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
+            </div>
+        </div>
+    </div>
+<% } %>
+
+<% if (user.followings.length > 0 ) { %>
+    <div class="team">
+        <div class="container_with">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="titlepage text_align_center">
+                        <h2>Takip ettiklerim</h2>
+                    </div>
+                </div>
+
+                <% for (following of user.followings) { %>
+
+                    <div class="col-md-4">
+                        <div class="team_box text_align_center">
+                            <div class="team_img">
+                                <figure><img src="<%= following.profilePhoto %>" alt="#"/></figure>
+                            </div>
+                            <div class="craig">
+                                <h3>
+                                    <%= following.username %>
+                                </h3>
+                                <span>PHOTOGRAPHER</span>
+                                <ul class="social_icon ">
+                                    <li><a href="Javascript:void(0)"><i class="fa fa-facebook"
+                                                                        aria-hidden="true"></i></a>
+                                    </li>
+                                    <li><a href="Javascript:void(0)"><i class="fa fa-twitter"
+                                                                        aria-hidden="true"></i></a>
+                                    </li>
+                                    <li><a href="/users/<%= following._id %>"><i class="fa fa-external-link-square"
+                                                                                 aria-hidden="true"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                        <div style="margin-top: 50px; margin-bottom: 50px;" class="container">
-                          <div class="row">
-                            <div class="col-md-12 ">
-                              <div class="text_align_center">
-                                <h2 style="
+                    </div>
+
+                <% } %>
+
+            </div>
+        </div>
+    </div>
+<% } %>
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
+     aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div style="margin-top: 50px; margin-bottom: 50px;" class="container">
+                <div class="row">
+                    <div class="col-md-12 ">
+                        <div class="text_align_center">
+                            <h2 style="
                     font-size: 30px;
                     margin-bottom: 20px;
                     color: #D43A8E;
                 ">Add New Photo</h2>
-                              </div>
-                            </div>
-                            <div class="col-md-10 offset-md-1">
-                              <form id="request" class="main_form" method="POST" action="/photos"
-                                enctype="multipart/form-data">
-                                <div class="row">
-                                  <div class="col-md-12">
-                                    <input class="form_control" placeholder="Name" type="text" name="name">
-                                  </div>
-                                  <div class="col-md-12">
-                                    <textarea name="description" style="height: 150px;" class="form_control"
-                                      placeholder="Description" rows="5"></textarea>
-                                  </div>
-
-                                  <div style="margin-bottom: 20px ;" class="col-md-12">
-                                    <input type="file" name="image" class="form-control-file">
-                                  </div>
-
-                                  <div class="col-md-12">
-                                    <div class="group_form">
-                                      <button class="read_more">Upload File</button>
-                                    </div>
-                                  </div>
-                                </div>
-                              </form>
-                            </div>
-                          </div>
                         </div>
-                      </div>
                     </div>
-                  </div>
+                    <div class="col-md-10 offset-md-1">
+                        <form id="request" class="main_form" method="POST" action="/photos"
+                              enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <input class="form_control" placeholder="Name" type="text" name="name">
+                                </div>
+                                <div class="col-md-12">
+                                    <textarea name="description" style="height: 150px;" class="form_control"
+                                              placeholder="Description" rows="5"></textarea>
+                                </div>
+
+                                <div style="margin-bottom: 20px ;" class="col-md-12">
+                                    <input type="file" name="image" class="form-control-file">
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="group_form">
+                                        <button class="read_more">Upload File</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 
-
-
-
-
-
-
-
-
-
-
-                        <!-- Profil Adı Güncelleme Butonu -->
-    <div class="row">
-      <div class="col-md-12 text_align_center">
+<!-- Profil Adı Güncelleme Butonu -->
+<div class="row">
+    <div class="col-md-12 text_align_center">
         <button data-toggle="modal" data-target="#profileNameModal" type="button"
-          style="margin-top: 20px;" class="btn btn-primary">
-          Profil Adı Düzenle
+                style="margin-top: 20px;" class="btn btn-primary">
+            Profil Adı Düzenle
         </button>
-      </div>
     </div>
-    
-    <!-- Biyografi Güncelleme Butonu -->
-    <div class="row">
-      <div class="col-md-12 text_align_center">
+</div>
+
+<!-- Biyografi Güncelleme Butonu -->
+<div class="row">
+    <div class="col-md-12 text_align_center">
         <button data-toggle="modal" data-target="#bioModal" type="button"
-          style="margin-top: 20px;" class="btn btn-secondary">
-          Biyografi Düzenle
+                style="margin-top: 20px;" class="btn btn-secondary">
+            Biyografi Düzenle
         </button>
-      </div>
     </div>
-    
-    <!-- Profil Fotoğrafı Yükleme Butonu -->
-    <div class="row">
-      <div class="col-md-12 text_align_center">
+</div>
+
+<!-- Profil Fotoğrafı Yükleme Butonu -->
+<div class="row">
+    <div class="col-md-12 text_align_center">
         <button data-toggle="modal" data-target="#profilePhotoModal" type="button"
-          style="margin-top: 20px;" class="btn btn-success">
-          Profil Fotoğrafı Yükle
+                style="margin-top: 20px;" class="btn btn-success">
+            Profil Fotoğrafı Yükle
         </button>
-      </div>
     </div>
+</div>
 
-    <!-- Profil Adı Güncelleme Modal -->
-    <div class="modal fade" id="profileNameModal" tabindex="-1" role="dialog" aria-labelledby="profileNameModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="profileNameModalLabel">Profil Adı Düzenle</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form id="profileNameForm" method="POST" action="/users/updateProfileName">
-              <div class="form-group">
-                <label for="profileName">Profile Name</label>
-                <input type="text" class="form-control" id="profileName" name="profileName" value="<%= user.profileName %>">
-              </div>
-              <button type="submit" class="btn btn-primary">Save changes</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Biyografi Güncelleme Modal -->
-    <div class="modal fade" id="bioModal" tabindex="-1" role="dialog" aria-labelledby="bioModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="bioModalLabel">Biyografi Düzenle</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form id="bioForm" method="POST" action="/users/updateBio">
-              <div class="form-group">
-                <label for="bio">Bio</label>
-                <textarea class="form-control" id="bio" name="bio" rows="3"><%= user.bio %></textarea>
-              </div>
-              <button type="submit" class="btn btn-primary">Save changes</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Profil Fotoğrafı Yükleme Modal -->
-    <div class="modal fade" id="profilePhotoModal" tabindex="-1" role="dialog" aria-labelledby="profilePhotoModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="profilePhotoModalLabel">Profil Fotoğrafı Yükle</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <form id="profilePhotoForm" method="POST" action="/users/uploadProfilPhoto" enctype="multipart/form-data">
-              <div class="form-group">
-                <label for="profilePhoto">Profile Photo</label>
-                <input type="file" class="form-control-file" id="profilePhoto" name="profilePhoto">
-              </div>
-              <button type="submit" class="btn btn-primary">Upload Photo</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Profil Şifre Değiştirme Butonu -->
+<!-- Profil Şifre Değiştirme Butonu -->
 <div class="row">
   <div class="col-md-12 text_align_center">
     <button data-toggle="modal" data-target="#changePasswordModal" type="button"
-      style="margin-top: 20px; margin-left: 50%; transform: translateX(-50%);" class="btn btn-warning">
+            style="margin-top: 20px;" class="btn btn-warning">
       Change Password
     </button>
   </div>
 </div>
 
-<!-- Şifre Değiştirme Modal -->
-<div class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="changePasswordModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="changePasswordModalLabel">Change Password</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form id="changePasswordForm" method="POST" action="/users/changePassword">
-          <div class="form-group">
-            <label for="currentPassword">Current Password</label>
-            <input type="password" class="form-control" id="currentPassword" name="currentPassword" required>
-          </div>
-          <div class="form-group">
-            <label for="newPassword">New Password</label>
-            <input type="password" class="form-control" id="newPassword" name="newPassword" required>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Change Password</button>
-          </div>
-        </form>
-      </div>
+
+<!-- Profil Adı Güncelleme Modal -->
+<div class="modal fade" id="profileNameModal" tabindex="-1" role="dialog" aria-labelledby="profileNameModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="profileNameModalLabel">Profil Adı Düzenle</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="profileNameForm" method="POST" action="/users/updateProfileName">
+                    <div class="form-group">
+                        <label for="profileName">Profile Name</label>
+                        <input type="text" class="form-control" id="profileName" name="profileName"
+                               value="<%= user.profileName %>">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </form>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
-  <p>Followers: <%= user.followersCount %></p>
-  <p>Following: <%= user.followingsCount %></p>
+<!-- Biyografi Güncelleme Modal -->
+<div class="modal fade" id="bioModal" tabindex="-1" role="dialog" aria-labelledby="bioModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="bioModalLabel">Biyografi Düzenle</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="bioForm" method="POST" action="/users/updateBio">
+                    <div class="form-group">
+                        <label for="bio">Bio</label>
+                        <textarea class="form-control" id="bio" name="bio" rows="3"><%= user.bio %></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save changes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Profil Fotoğrafı Yükleme Modal -->
+<div class="modal fade" id="profilePhotoModal" tabindex="-1" role="dialog" aria-labelledby="profilePhotoModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="profilePhotoModalLabel">Profil Fotoğrafı Yükle</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="profilePhotoForm" method="POST" action="/users/uploadProfilPhoto"
+                      enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="profilePhoto">Profile Photo</label>
+                        <input type="file" class="form-control-file" id="profilePhoto" name="profilePhoto">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Upload Photo</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Şifre Değiştirme Modal -->
+<div class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="changePasswordModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="changePasswordModalLabel">Change Password</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="changePasswordForm" method="POST" action="/users/changePassword">
+                    <div class="form-group">
+                        <label for="currentPassword">Current Password</label>
+                        <input type="password" class="form-control" id="currentPassword" name="currentPassword"
+                               required>
+                    </div>
+                    <div class="form-group">
+                        <label for="newPassword">New Password</label>
+                        <input type="password" class="form-control" id="newPassword" name="newPassword" required>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Change Password</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p>Followers: <%= user.followersCount %></p>
+<p>Following: <%= user.followingsCount %></p>
 
 <%- include("partials/_footer") %>
